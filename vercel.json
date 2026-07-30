@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/spasibo",
+      "destination": "/spasibo/index.html"
+    },
+    {
+      "source": "/thanks",
+      "destination": "/thanks/index.html"
+    }
+  ]
+}
