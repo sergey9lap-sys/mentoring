@@ -260,20 +260,22 @@ if (!reducedMotion) {
     }
   });
 
-  gsap.fromTo(".outcomes",
-    { y: 92, clipPath: "inset(0 2% 0 2% round 30px 30px 0 0)" },
-    {
-      y: 0,
-      clipPath: "inset(0 0 0 0 round 30px 30px 0 0)",
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".outcomes",
-        start: "top 98%",
-        end: "top 56%",
-        scrub: 0.5
+  if (desktop.matches) {
+    gsap.fromTo(".outcomes",
+      { y: 92, clipPath: "inset(0 2% 0 2% round 30px 30px 0 0)" },
+      {
+        y: 0,
+        clipPath: "inset(0 0 0 0 round 30px 30px 0 0)",
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".outcomes",
+          start: "top 98%",
+          end: "top 56%",
+          scrub: 0.5
+        }
       }
-    }
-  );
+    );
+  }
 
   if (desktop.matches) {
     ScrollTrigger.create({

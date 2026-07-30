@@ -2278,3 +2278,68 @@ a[target="_blank"].button span::after{transform:rotate(-45deg)}
     padding-left:28px;
   }
 }
+
+/* Small-screen density and edge safety v20 */
+.weeks__start::before{content:" · "}
+
+@media(max-width:700px){
+  .practice__grid article{
+    min-height:0;
+    padding:24px 20px 28px;
+  }
+  .practice__grid h3{
+    margin:48px 0 14px;
+  }
+  .practice__grid p{
+    margin-bottom:0;
+  }
+
+  .weeks__start{
+    display:block;
+    margin-top:4px;
+  }
+  .weeks__start::before{content:""}
+  .weeks__grid article{
+    min-height:0;
+    padding:24px 20px 28px;
+  }
+  .weeks__grid h3{
+    margin:46px 0 14px;
+  }
+  .weeks__grid p{margin-bottom:0}
+
+  .outcomes{
+    transform:none !important;
+    clip-path:none !important;
+  }
+  .outcomes__grid{
+    width:calc(100% - 32px);
+    margin-inline:auto;
+    padding:0;
+  }
+
+  .care .shell,
+  .care__grid{
+    width:calc(100% - 40px);
+    max-width:100%;
+    margin-inline:auto;
+    padding:0;
+  }
+  .care__copy{
+    width:100%;
+    min-width:0;
+    margin:0;
+    padding:0;
+    transform:none;
+  }
+  .care__copy h2,
+  .care__copy>p:not(.eyebrow){
+    width:100%;
+    max-width:340px;
+    margin-right:auto;
+  }
+  .care__channels{
+    width:100%;
+    max-width:100%;
+  }
+}
