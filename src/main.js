@@ -39,6 +39,64 @@ document.querySelectorAll("details").forEach((detail) => {
   });
 });
 
+const problemStage = document.querySelector(".problem-track");
+const problemCards = Array.from(document.querySelectorAll(".problem"));
+const problemCounter = document.querySelector("[data-problem-current]");
+let activeProblem = 0;
+let problemTimer;
+
+function showProblem(nextIndex, direction = 1) {
+  if (!problemCards.length) return;
+  const normalized = (nextIndex + problemCards.length) % problemCards.length;
+  const current = problemCards[activeProblem];
+  const next = problemCards[normalized];
+  if (current === next && next.classList.contains("is-active")) return;
+
+  current?.classList.remove("is-active");
+  next.classList.add("is-active");
+
+  activeProblem = normalized;
+  problemCards.forEach((card, index) => card.setAttribute("aria-hidden", index === activeProblem ? "false" : "true"));
+  if (problemCounter) problemCounter.textContent = String(activeProblem + 1).padStart(2, "0");
+}
+
+function startProblemRotation() {
+  if (reducedMotion || problemCards.length < 2) return;
+  window.clearInterval(problemTimer);
+  problemTimer = window.setInterval(() => showProblem(activeProblem + 1, 1), 5600);
+}
+
+if (problemCards.length) {
+  problemCards[0].classList.add("is-active");
+  problemCards.forEach((card, index) => card.setAttribute("aria-hidden", index === 0 ? "false" : "true"));
+  document.querySelector("[data-problem-prev]")?.addEventListener("click", () => { showProblem(activeProblem - 1, -1); startProblemRotation(); });
+  document.querySelector("[data-problem-next]")?.addEventListener("click", () => { showProblem(activeProblem + 1, 1); startProblemRotation(); });
+  problemStage?.addEventListener("mouseenter", () => window.clearInterval(problemTimer));
+  problemStage?.addEventListener("mouseleave", startProblemRotation);
+  startProblemRotation();
+}
+
+document.querySelectorAll("[data-widget-open]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const modal = document.getElementById(button.dataset.widgetOpen);
+    if (!(modal instanceof HTMLDialogElement)) return;
+    modal.showModal();
+    document.body.classList.add("modal-open");
+  });
+});
+
+document.querySelectorAll(".widget-modal").forEach((modal) => {
+  const closeModal = () => {
+    modal.close();
+    document.body.classList.remove("modal-open");
+  };
+  modal.querySelector("[data-widget-close]")?.addEventListener("click", closeModal);
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) closeModal();
+  });
+  modal.addEventListener("close", () => document.body.classList.remove("modal-open"));
+});
+
 if (!reducedMotion) {
   const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
   heroTimeline
@@ -47,20 +105,6 @@ if (!reducedMotion) {
     .from(".hero h1", { opacity: 0, y: 28, filter: "blur(7px)", duration: 0.9 }, 0.34)
     .from(".hero__action-row", { opacity: 0, y: 18, duration: 0.65 }, 0.62)
     .from(".hero__facts", { opacity: 0, y: 12, duration: 0.55 }, 0.78);
-
-  if (desktop.matches) {
-    gsap.to(".hero__visual img", {
-      yPercent: 7,
-      opacity: 0.72,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: 0.6
-      }
-    });
-  }
 
   gsap.utils.toArray(".section-head").forEach((heading) => {
     gsap.from(heading, {
@@ -82,14 +126,14 @@ if (!reducedMotion) {
     scrollTrigger: { trigger: ".audience__list", start: "top 78%", once: true }
   });
 
-  gsap.from(".problem", {
-    y: 54,
+  gsap.from(".experience-fit__grid article", {
+    y: 38,
     opacity: 0,
-    filter: "blur(8px)",
-    duration: 0.85,
-    stagger: 0.1,
+    filter: "blur(6px)",
+    duration: 0.72,
+    stagger: 0.09,
     ease: "power3.out",
-    scrollTrigger: { trigger: ".problem-track", start: "top 76%", once: true }
+    scrollTrigger: { trigger: ".experience-fit__grid", start: "top 80%", once: true }
   });
 
   gsap.fromTo(".audience",
@@ -246,6 +290,16 @@ if (!reducedMotion) {
     stagger: 0.12,
     ease: "power3.out",
     scrollTrigger: { trigger: ".tariffs__grid", start: "top 75%", once: true }
+  });
+
+  gsap.from(".corporate-tariff > div", {
+    y: 34,
+    opacity: 0,
+    filter: "blur(5px)",
+    duration: 0.72,
+    stagger: 0.1,
+    ease: "power3.out",
+    scrollTrigger: { trigger: ".corporate-tariff", start: "top 78%", once: true }
   });
 
   gsap.from(".author__photo img", {
