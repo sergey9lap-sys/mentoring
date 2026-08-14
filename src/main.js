@@ -27,6 +27,10 @@ function bindRussianShortWords(root) {
 
 bindRussianShortWords(document.body);
 
+const contourLabels = document.querySelectorAll(".contour .eyebrow");
+if (contourLabels[0]) contourLabels[0].textContent = "КОНТУР 1 · НЕДЕЛИ 1–3";
+if (contourLabels[1]) contourLabels[1].textContent = "КОНТУР 2 · НЕДЕЛИ 4–6";
+
 function closeSiblingAccordions(active) {
   document.querySelectorAll("details[open]").forEach((item) => {
     if (item !== active) item.removeAttribute("open");
