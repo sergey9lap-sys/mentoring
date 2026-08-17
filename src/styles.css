@@ -3545,7 +3545,9 @@ h3,.audience__item h3,.problem h3,.why__points h3,.path article h3,
 
 .proof-strip{padding-block:96px;overflow:hidden}
 .proof-strip__heading{display:grid;grid-template-columns:.7fr 1.3fr;gap:44px;margin-bottom:72px}
-.proof-strip__heading h2{max-width:760px;margin:0;font-size:clamp(42px,5vw,64px);font-weight:500;line-height:1.04;letter-spacing:-.03em}
+.proof-strip__intro{max-width:760px;color:var(--ink);opacity:1}
+.proof-strip__heading h2{max-width:760px;margin:0;color:var(--ink);font-size:clamp(42px,5vw,64px);font-weight:500;line-height:1.04;letter-spacing:-.03em;opacity:1}
+.proof-strip__intro p{max-width:660px;margin:20px 0 0;color:#6d555d;font-size:17px;line-height:1.6}
 .proof-strip__group+.proof-strip__group{margin-top:54px;padding-top:46px}
 .proof-strip__group .eyebrow{margin-bottom:24px}
 .logo-marquee{position:relative;width:100%;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
@@ -3571,6 +3573,26 @@ h3,.audience__item h3,.problem h3,.why__points h3,.path article h3,
 
 @media(prefers-reduced-motion:reduce){
   .logo-marquee__track{animation-play-state:paused}
+}
+
+/* Content consistency and viewport-fit pass v33 */
+.final-cta{
+  min-height:min(640px,calc(100svh - 76px));
+  padding:80px 0 64px;
+  align-items:center;
+}
+.final-cta:before{height:44px}
+.final-cta h2{margin-bottom:20px}
+.final-cta__inner>p:not(:first-child){margin-bottom:24px}
+.final-cta small{margin-top:18px}
+
+@media(max-width:900px){
+  .final-cta{min-height:min(620px,calc(100svh - 68px));padding:72px 0 56px}
+}
+
+@media(max-width:600px){
+  .proof-strip__intro p{font-size:15px}
+  .final-cta{min-height:auto;padding:72px 0 56px}
 }
 
 /* Center only the unpaired tail cards; preserve the original chapter motion */
