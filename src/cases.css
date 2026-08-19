@@ -12,7 +12,8 @@
 .case-card__body>span{min-height:48px;color:var(--case-muted);font-size:13px;line-height:1.45}
 .case-card__body h3{margin:30px 0 26px;font-size:24px;line-height:1.2;letter-spacing:-.025em}
 .case-card__body b{display:flex;justify-content:space-between;margin-top:auto;padding-top:18px;border-top:1px solid rgba(233,221,207,.16);font-size:13px}
-.case-card__body i{color:var(--case-gold);font-family:Arial,sans-serif;font-style:normal;font-variant-emoji:text}
+.case-card__body i{color:var(--case-gold);font-family:Arial,sans-serif;font-size:0;font-style:normal}
+.case-card__body i::before{content:"→";font-size:18px;line-height:1}
 .cases-preview__more{display:flex;justify-content:center;margin-top:42px}
 
 .case-page{margin:0;background:var(--case-deep);color:var(--case-paper);font-family:"Golos Text",Arial,sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased}
