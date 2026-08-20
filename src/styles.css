@@ -1310,6 +1310,13 @@ h1,h2,h3,
 .audience__avatar--expert{background-position:0 center}
 .audience__avatar--corporate{background-position:50% center}
 .audience__avatar--entrepreneur{background-position:100% center}
+.audience__avatar--educator,
+.audience__avatar--company{
+  background-position:center;
+  background-size:cover;
+}
+.audience__avatar--educator{background-image:url("/public/audience-educator-v1.avif")}
+.audience__avatar--company{background-image:url("/public/audience-company-v1.avif")}
 
 .problem{
   position:relative;
@@ -3619,14 +3626,14 @@ h3,.audience__item h3,.problem h3,.why__points h3,.path article h3,
   .final-cta{min-height:auto;padding:72px 0 56px}
 }
 
-/* Center only the unpaired tail cards; preserve the original chapter motion */
+/* Keep the nine program topics in a continuous 01–09 reading order. */
 @media(min-width:901px){
   .contour__topics li:nth-child(5){
-    grid-column:1/-1;
-    grid-row:5;
-    justify-self:center;
-    width:calc(50% - 7px);
-    margin-block:6px;
+    grid-column:auto;
+    grid-row:auto;
+    justify-self:stretch;
+    width:auto;
+    margin:0;
   }
 }
 
@@ -3818,4 +3825,44 @@ h3,.audience__item h3,.problem h3,.why__points h3,.path article h3,
   .steps__line h3{margin-top:24px;font-size:22px}
   .steps .section-note{margin-top:28px}
   .final-cta h2{font-size:clamp(48px,14vw,62px);overflow-wrap:break-word}
+}
+
+/* Desktop density and resilient numbering v42 — final cascade */
+@media(min-width:901px){
+  .audience{
+    display:flex;
+    align-items:center;
+    height:100svh;
+    min-height:680px;
+    max-height:900px;
+    padding:70px 0 22px;
+    overflow:hidden;
+  }
+  .audience>.shell{width:min(1240px,calc(100% - 64px))}
+  .audience .section-head{margin-bottom:18px}
+  .audience .section-head h2{font-size:clamp(34px,3vw,42px);line-height:1.02}
+  .audience__item,.audience__item:nth-child(n){
+    grid-template-columns:48px 64px minmax(220px,.9fr) minmax(340px,1.3fr);
+    gap:18px;
+    min-height:0;
+    padding:7px 16px;
+  }
+  .audience__item>b{font-size:30px;line-height:1}
+  .audience__avatar{width:64px;height:64px;border-radius:12px}
+  .audience__item h3{font-size:17px}
+  .audience__item p{font-size:12px;line-height:1.38}
+  .audience__actions{margin-top:14px}
+
+  .contour__topics{overflow:visible}
+  .contour__topics li{
+    grid-template-columns:38px minmax(0,1fr);
+    padding-left:22px;
+  }
+  .contour__topics li::before{
+    display:block;
+    width:34px;
+    min-width:34px;
+    margin-left:0;
+    overflow:visible;
+  }
 }
